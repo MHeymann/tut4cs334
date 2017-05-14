@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<title>Quiz101</title>
+
+		<link rel="stylesheet" type="text/css"
+		href="https://fonts.googleapis.com/css?family=Pangolin">
+
+		<!-- Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet">
+
+		<script type="text/javascript" src="js/quiz.js">
+		</script>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+			<![endif]-->
+	</head>
+	<body>
+		<header id="top" class="container">
+			<h1>Tut3</h1>
+		</header>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1 col-lg-2 visible-md visible-lg">
+				</div>
+				<div class="col-sm-12 col-m-10 col-lg-8">
+					<h3>A Lovely 10 Question Quiz</h3>
+					<form id="quizform" name="quizform" action="/php/action_page.php">
+						<p>Name</p>
+						<input  type="text" name="name" value=""><br>
+						<div class="panel panel-default" id="pq1">
+							<div class="panel-body" id="pbq1">
+								<p id="q1">Question 1</p>
+								<input type="radio" name="rq1" value="v1">
+								<label class="rl1">V1</label><br>
+								<input type="radio" name="rq1" value="v2">
+								<label class="rl1">V2</label><br>
+								<input type="radio" name="rq1" value="v3">
+								<label class="rl1">V3</label><br>
+								<input type="radio" name="rq1" value="v4">
+								<label class="rl1">V4</label><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq2">
+							<div class="panel-body" id="pbq2">
+								<p id="q2">Question 2</p>
+								<input type="radio" name="rq2" value="v1">
+								<label class="rl2">V1</label><br>
+								<input type="radio" name="rq2" value="v2">
+								<label class="rl2">V2</label><br>
+								<input type="radio" name="rq2" value="v3">
+								<label class="rl2">V3</label><br>
+								<input type="radio" name="rq2" value="v4">
+								<label class="rl2">V4</label><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq3">
+							<div class="panel-body" id="pbq3">
+								<p id="q3">Question 3</p>
+								<input type="radio" name="rq3" value="v1">
+								<label class="rl3">V1</label><br>
+								<input type="radio" name="rq3" value="v2">
+								<label class="rl3">V2</label><br>
+								<input type="radio" name="rq3" value="v3">
+								<label class="rl3">V3</label><br>
+								<input type="radio" name="rq3" value="v4">
+								<label class="rl3">V4</label><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq4">
+							<div class="panel-body" id="pbq4">
+								<p id="q4">Question 4</p>
+								<input type="radio" name="rq4" value="v1">
+								<label class="rl4">V1</label><br>
+								<input type="radio" name="rq4" value="v2">
+								<label class="rl4">V2</label><br>
+								<input type="radio" name="rq4" value="v3">
+								<label class="rl4">V3</label><br>
+								<input type="radio" name="rq4" value="v4">
+								<label class="rl4">V4</label><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq5">
+							<div class="panel-body" id="pbq5">
+								<p id="q5">Question 5</p>
+								<input type="radio" name="rq5" value="v1">
+								<label class="rl5">V1</label><br>
+								<input type="radio" name="rq5" value="v2">
+								<label class="rl5">V2</label><br>
+								<input type="radio" name="rq5" value="v3">
+								<label class="rl5">V3</label><br>
+								<input type="radio" name="rq5" value="v4">
+								<label class="rl5">V4</label><br>
+							</div>
+
+						</div>
+						<div class="panel panel-default" id="pq6">
+							<div class="panel-body" id="pbq6">
+								<p id="q6">Question 6</p>
+								<input class="qa" type="text" name="q6a" value=""><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq7">
+							<div class="panel-body" id="pbq7">
+								<p id="q7">Question 7</p>
+								<input class="qa" type="text" name="q7a" value=""><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq8">
+							<div class="panel-body" id="pbq8">
+								<p id="q8">Question 8</p>
+								<input class="qa" type="text" name="q8a" value=""><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq9">
+							<div class="panel-body" id="pbq9">
+								<p id="q9">Question 9</p>
+								<input class="qa" type="text" name="q9a" value=""><br>
+							</div>
+						</div>
+						<div class="panel panel-default" id="pq10">
+							<div class="panel-body" id="pbq10">
+								<p id="q10">Question 10</p>
+								<input class="qa" type="text" name="q10a" value=""><br>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<input type="submit" value="Submit",
+								name="subbutton">
+							</div>
+						</div>
+					</form>
+					<div class="panel panel-default">
+						<div class="panel-body" id="contactResponse">
+						</div>
+					</div>
+
+				</div>
+				<div class="col-md-1 col-lg-2 visible-md visible-lg">
+				</div>
+			</div>
+		</div>
+
+		<footer class="container">
+			<p>Designed by Murray Heymann</p>
+		</footer>
+
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>
