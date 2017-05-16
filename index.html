@@ -26,11 +26,12 @@
 	</head>
 	<body>
 		<header id="top" class="container">
-			<h1>Tut3</h1>
+			<h1>Tut4</h1>
 		</header>
 
 		<div class="container">
 			<div class="row">
+				<br>
 				<div class="col-sm-1 col-md-2 visible-sm visible-md
 					visible-lg">
 				</div>
@@ -40,18 +41,29 @@
 					<div class="panel panel-default col-md-10 col-lg-8">
 						<div class="panel-body">
 							<form id="login_form" name="login_form" action="php/login.php">
-								<label for="email">Log In Email:</label>
+								<label for="email">Email:</label>
 								<input type="email" class="form-control
 									text-field" required
-									id="email" name="email"><br>
+									id="email" name="email"
+									title="Valid emails only"><br>
+
+								<div id="extend-form"></div>
 								
+								<input type="submit" class="btn btn-default"
+									value="Log In" name="logButton"
+									id="logButton">
+								<input type="submit" class="btn btn-default" 
+									value="Register" name="regButton"
+									id="regButton">
+								<input type="submit" class="btn btn-default" 
+									value="" name="sendButton"
+									id="sendButton"
+									style="display:none">
+								<input type="button" class="btn btn-default"
+									value="Clear" id="login_clear">
 							</form>
-							<input type="button" class="btn btn-default"
-								value="Log In" name="subButton"
-								id="subButton">
-							<input type="button" class="btn btn-default" 
-								value="Register" name="regButton"
-								id="regButton">
+							<div id="server-message"></div>
+							
 						</div>
 					</div>
 					<div class="col-md-1 col-lg-2 visible-md visible-lg">
