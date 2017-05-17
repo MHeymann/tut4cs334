@@ -12,7 +12,7 @@ $(document).ready(function() {
 		data: {
 			user: localStorage.getItem("email")
 		},
-		dataType: 'html',
+		dataType: 'json',
 		success: handle_get_qs_response,
 		error: function(xhr, textStatus, errorMessage) {
 			console.log(errorMessage);
@@ -66,7 +66,6 @@ function handle_submit_response(response) {
 	if (response.error) {
 		console.log(response.error_message);
 	} else  {
-		console.log(JSON.stringify(response.answers));
 		for (q in response.answers.multi) {
 			if (!response.answers.multi[q].user) {
 				console.log("multi question " + q + ": false");
@@ -88,6 +87,7 @@ function handle_submit_response(response) {
 }
 
 function handle_get_qs_response(response) {
+//	console.log(response);
 	if (response.error) {
 		console.log(response.error_message);
 	} else  {

@@ -57,7 +57,7 @@ while($row = $result->fetch_assoc()) {
 			$ans_c = 0;
 		}
 
-		$multi[$i]["stats"] = array("system" => ($ask_c / $ans_c * 100));
+		$multi[$i]["stats"] = array("system" => ($ans_c / $ask_c * 100));
 		/* TODO: query for user
 		 */
 		$multi[$i]["stats"]["user"] = NULL;
@@ -100,7 +100,7 @@ while($row = $result->fetch_assoc()) {
 			$ans_c = 0;
 		}
 
-		$written[$i]["stats"] = array("system" => ($ask_c / $ans_c * 100));
+		$written[$i]["stats"] = array("system" => ($ans_c / $ask_c * 100));
 		/* TODO: query for user
 		 */
 		$written[$i]["stats"]["user"] = NULL;
