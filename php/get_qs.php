@@ -110,8 +110,6 @@ while($row = $result->fetch_assoc()) {
 }
 $result->close();
 
-
-
 $json = array(
 	"error" => false,
 	"user" => $email,
