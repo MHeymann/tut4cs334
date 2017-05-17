@@ -33,7 +33,7 @@
 				</div>
 				<div class="col-sm-12 col-m-10 col-lg-8">
 					<h3>Quiz 2.0</h3>
-					<form id="multi-form" action="/php/action_page.php">
+					<form id="submit-form" action="php/get_marks.php">
 						<div id="multi-div">
 							<div class="panel panel-default" id="pq1">
 								<div class="panel-body" id="multiple">
@@ -49,9 +49,7 @@
 								</div>
 							</div>
 						</div>
-					</form>
 
-					<form id="written-form" action="/php/action_page.php">
 						<div id="written-div">
 							<div class="panel panel-default" id="pq6">
 								<div class="panel-body" id="pbq6">
@@ -60,13 +58,11 @@
 								</div>
 							</div>
 						</div>
-					</form>
 
-					<form id="submit-form" action="/php/get_marks.php">
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<input type="submit" value="Submit",
-								name="subbutton">
+								name="subbutton" id="subbutton">
 							</div>
 						</div>
 					</form>

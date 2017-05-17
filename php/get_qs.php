@@ -18,6 +18,8 @@ for ($i = 1; $i <= 5; $i++) {
 	$written[($i-1)]["qID"] = $i + 403;
 	$multi[($i-1)]["question"] = "some question, multi number $i";
 	$written[($i-1)]["question"] = "some question, written number $i";
+	$multi[($i-1)]["stats"] = array("user" => 30.3, "system" => 20.7);
+	$written[($i-1)]["stats"] = array("user" => null, "system" => 20);
 
 	$multi[($i-1)]["opts"] = array();
 	$multi[($i-1)]["opts"][0] = "some option 1 for question $i";
