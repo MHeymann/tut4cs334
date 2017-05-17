@@ -110,11 +110,11 @@ function try_create_question_tables($db_name, $connect, $verbose) {
 	$sql = "CREATE TABLE `multi_q` (";
 	$sql .= "qID INT(10) NOT NULL AUTO_INCREMENT,";
 	$sql .= "question VARCHAR(100) NOT NULL,";
-	$sql .= "opt1 VARCHAR(40) NOT NULL,";
-	$sql .= "opt2 VARCHAR(40) NOT NULL,";
-	$sql .= "opt3 VARCHAR(40) NOT NULL,";
-	$sql .= "opt4 VARCHAR(40) NOT NULL,";
-	$sql .= "ans VARCHAR(40) NOT NULL,";
+	$sql .= "opt1 VARCHAR(80) NOT NULL,";
+	$sql .= "opt2 VARCHAR(80) NOT NULL,";
+	$sql .= "opt3 VARCHAR(80) NOT NULL,";
+	$sql .= "opt4 VARCHAR(80) NOT NULL,";
+	$sql .= "ans VARCHAR(80) NOT NULL,";
 	$sql .= "ask_count INT(10),";
 	$sql .= "right_count INT(10),";
 	$sql .= "PRIMARY KEY (qID)";
@@ -147,7 +147,7 @@ function try_create_question_tables($db_name, $connect, $verbose) {
 	$sql = "CREATE TABLE `written_q` (";
 	$sql .= "qID INT(10) NOT NULL AUTO_INCREMENT,";
 	$sql .= "question VARCHAR(100) NOT NULL,";
-	$sql .= "ans VARCHAR(40) NOT NULL,";
+	$sql .= "ans VARCHAR(80) NOT NULL,";
 	$sql .= "ask_count INT(10),";
 	$sql .= "right_count INT(10),";
 	$sql .= "PRIMARY KEY (qID)";

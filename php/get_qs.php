@@ -53,14 +53,22 @@ while($row = $result->fetch_assoc()) {
 	} else {
 		$ask_c = $row["ask_count"];
 		$ans_c = $row["right_count"];
+
 		if ($ans_c === NULL) {
 			$ans_c = 0;
 		}
 
-		$multi[$i]["stats"] = array("system" => ($ask_c / $ans_c * 100));
-		/* TODO: query for user
-		 */
-		$multi[$i]["stats"]["user"] = NULL;
+		$multi[$i]["stats"] = array("system" => ($ans_c / $ask_c * 100));
+
+		$user_counts = select_user_count($connect, "multi_qu_count",
+			$row["qID"], $email);
+		if ($user_counts["q_count"] == 0) {
+			$multi[$i]["stats"]["user"] = NULL;
+		} else {
+			$multi[$i]["stats"]["user"] = ($user_counts["u_count"] /
+			   	$user_counts["q_count"] * 100);
+		}
+
 	}
 
 	$i++;
@@ -100,10 +108,17 @@ while($row = $result->fetch_assoc()) {
 			$ans_c = 0;
 		}
 
-		$written[$i]["stats"] = array("system" => ($ask_c / $ans_c * 100));
+		$written[$i]["stats"] = array("system" => ($ans_c / $ask_c * 100));
 		/* TODO: query for user
 		 */
-		$written[$i]["stats"]["user"] = NULL;
+		$user_counts = select_user_count($connect, "written_qu_count",
+			$row["qID"], $email);
+		if ($user_counts["q_count"] == 0) {
+			$written[$i]["stats"]["user"] = NULL;
+		} else {
+			$written[$i]["stats"]["user"] = ($user_counts["u_count"] /
+			   	$user_counts["q_count"] * 100);
+		}
 	}
 
 	$i++;
@@ -134,6 +149,52 @@ function try_use($db_name, $connect) {
 	$sql = "USE `$db_name`;";
 	if ($connect->query($sql) !== TRUE) {
 		echo_error("Failed to use new database $db_name.\n");
+	}
+}
+
+function select_user_id($connect, $email) {
+	$sql = "SELECT uID ";
+	$sql .= "FROM user ";
+	$sql .= "WHERE email = '$email';";
+	$result = $connect->query($sql);
+	if ($result === FALSE) {
+		$error = $connect->error;
+		echo_error("Could not perform select query on user. Error: $error");
+	}
+	if ($result->num_rows == 0) {
+		$result->close();
+		echo_error("User with email '$email' not found.");
+	} else {
+		$row = $result->fetch_assoc();
+		$result->close();
+
+		return $row['uID'];
+	}
+}
+
+function select_user_count($connect, $table, $qID, $email) {
+	if (($table !== "multi_qu_count") && ($table !== "written_qu_count")) {
+		echo_error("Incorrect use of select_user_count:" .
+			" unknown table specidfied - $table");
+	}
+	$uID = select_user_id($connect, $email);
+	$sql = "SELECT q_count, u_count ";
+	$sql .= "FROM $table ";
+	$sql .= "WHERE qID = $qID ";
+	$sql .= "AND uID = $uID;";
+	$result = $connect->query($sql);
+	if ($result === FALSE) {
+		$error = $connect->error;
+		echo_error("Could not perform select query on $table. Error: $error");
+	}
+	if ($result->num_rows == 0) {
+		$result->close();
+		return array("q_count" => 0,"u_count" => 0);
+	} else {
+		$row = $result->fetch_assoc();
+		$result->close();
+
+		return $row;
 	}
 }
 
