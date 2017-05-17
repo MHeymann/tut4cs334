@@ -125,9 +125,14 @@ function handle_send_response(response) {
 		}));
 	} else {
 		console.log("success!");
-		window.location = "questions.html";
+		if (typeof(Storage) !== "undefined") {
+			// Store
+			localStorage.setItem("email", response.user);
+			window.location = "questions.html";
+		} else {
+			alert("Sorry, your browser does not support Web Storage...");
+		}
 		//console.log(JSON.stringify(response));
-		/* TODO: redirect to quiz page */
 	}
 }
 
