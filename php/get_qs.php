@@ -3,33 +3,112 @@ ini_set('display_errors',1); // for the development PC only
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL); // ALWAYS
 
-$email   = $_POST['user'];
+$email = $_POST['user'];
 
 /*
  * TODO: connect to mysql database, check user password.
  */
 
-$multi = array();
-$written = array();
-for ($i = 1; $i <= 5; $i++) {
-	$multi[($i-1)] = array();
-	$written[($i-1)] = array();
-	$multi[($i-1)]["qID"] = $i + 509;
-	$written[($i-1)]["qID"] = $i + 403;
-	$multi[($i-1)]["question"] = "some question, multi number $i";
-	$written[($i-1)]["question"] = "some question, written number $i";
-	$multi[($i-1)]["stats"] = array("user" => 30.3, "system" => 20.7);
-	$written[($i-1)]["stats"] = array("user" => null, "system" => 20);
+$settings = parse_ini_file(__DIR__."/../.my.cnf", true);
+$connect = new mysqli(
+	$settings['client']['mysql_server'],
+	$settings['client']['user'],
+	$settings['client']['password']
+);
 
-	$multi[($i-1)]["opts"] = array();
-	$multi[($i-1)]["opts"][0] = "some option 1 for question $i";
-	$multi[($i-1)]["opts"][1] = "some option 2 for question $i";
-	$multi[($i-1)]["opts"][2] = "some option 3 for question $i";
-	$multi[($i-1)]["opts"][3] = "some option 4 for question $i";
-
-	$multi[($i-1)]["answer"] = "answer for multiple choice question number $i";
-	$written[($i-1)]["answer"] = "answer for written question number $i";
+if ($connect->connect_errno) {
+	$error = $connect->connect_error;
+	echo_error("Failed to connect to mysql server.  Error: $error.\n");
 }
+
+try_use("tut4_db", $connect);
+
+$sql = "SELECT * FROM multi_q ";
+$sql .= "ORDER BY RAND() ";
+$sql .= "LIMIT 5;";
+$result = $connect->query($sql);
+if ($result === FALSE) {
+	$error = $connect->error;
+	echo_error("Could not perform select query for multi quersions. Error: $error");
+}
+if ($result->num_rows == 0) {
+	$result->close();
+	echo_error("Table multi_q seems to not be populated. \n");
+}
+
+$multi = array();
+$i = 0;
+while($row = $result->fetch_assoc()) {
+	$multi[$i] = array();
+	$multi[$i]["qID"] = $row["qID"];
+	$multi[$i]["question"] = $row["question"];
+	$multi[$i]["opts"] = array();
+	for ($j = 0; $j < 4; $j++) {
+		$multi[$i]["opts"][$j] = $row["opt" . ($j + 1)];
+	}
+	$multi[$i]["answer"] = $row["ans"];
+
+	if (($row["ask_count"] === NULL) || ($row["ask_count"] === 0)) {
+		$multi[$i]["stats"] = array("user" => NULL, "system" => NULL);
+	} else {
+		$ask_c = $row["ask_count"];
+		$ans_c = $row["right_count"];
+		if ($ans_c === NULL) {
+			$ans_c = 0;
+		}
+
+		$multi[$i]["stats"] = array("system" => ($ask_c / $ans_c * 100));
+		/* TODO: query for user
+		 */
+		$multi[$i]["stats"]["user"] = NULL;
+	}
+
+	$i++;
+}
+$result->close();
+
+
+$sql = "SELECT * FROM written_q ";
+$sql .= "ORDER BY RAND() ";
+$sql .= "LIMIT 5;";
+$result = $connect->query($sql);
+if ($result === FALSE) {
+	$error = $connect->error;
+	echo_error("Could not perform select query for written quersions. Error: $error");
+}
+if ($result->num_rows == 0) {
+	$result->close();
+	echo_error("Table written_q seems to not be populated. \n");
+}
+
+
+
+$written = array();
+$i = 0;
+while($row = $result->fetch_assoc()) {
+	$written[$i] = array();
+	$written[$i]["qID"] = $row["qID"];
+	$written[$i]["question"] = $row["question"];
+	$written[$i]["answer"] = $row["ans"];
+
+	if (($row["ask_count"] === NULL) || ($row["ask_count"] === 0)) {
+		$written[$i]["stats"] = array("user" => NULL, "system" => NULL);
+	} else {
+		$ask_c = $row["ask_count"];
+		$ans_c = $row["right_count"];
+		if ($ans_c === NULL) {
+			$ans_c = 0;
+		}
+
+		$written[$i]["stats"] = array("system" => ($ask_c / $ans_c * 100));
+		/* TODO: query for user
+		 */
+		$written[$i]["stats"]["user"] = NULL;
+	}
+
+	$i++;
+}
+$result->close();
 
 
 
@@ -52,4 +131,12 @@ function echo_error($error_message) {
 	));
 	die();
 }
+
+function try_use($db_name, $connect) {
+	$sql = "USE `$db_name`;";
+	if ($connect->query($sql) !== TRUE) {
+		echo_error("Failed to use new database $db_name.\n");
+	}
+}
+
 ?>
