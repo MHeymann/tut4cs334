@@ -46,6 +46,9 @@ while($row = $result->fetch_assoc()) {
 	for ($j = 0; $j < 4; $j++) {
 		$multi[$i]["opts"][$j] = $row["opt" . ($j + 1)];
 	}
+	if (!shuffle($multi[$i]["opts"])) {
+		echo_error("shuffle failed");
+	}
 	$multi[$i]["answer"] = $row["ans"];
 
 	if (($row["ask_count"] === NULL) || ($row["ask_count"] === 0)) {
