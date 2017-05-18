@@ -35,6 +35,26 @@ if (isset($_POST['password2'])) {
 		));
 		die();
 	}
+
+	$pass_pattern = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{5,15}$/';
+	$preg_result = preg_match($pass_pattern, $_POST['password']);
+	if ($preg_result === FALSE) {
+		echo json_encode(array(
+			"error" => true,
+			"error_message" => "Error while testing password regular expression",
+		));
+		die();
+	} else if ($preg_result === 0) {
+		echo json_encode(array(
+			"error" => true,
+			"error_message" => "Password invalid." .
+			"  Must be between 5 and 15 characters with lowercase, " .
+			"uppercase and numeric",
+		));
+		die();
+
+	}
+
 }
 
 if (!isset($_POST['email'])) {
