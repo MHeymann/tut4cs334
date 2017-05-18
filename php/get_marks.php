@@ -44,7 +44,7 @@ foreach ($_POST['multi'] as $m_q => $m_val) {
 		$ask_count += 1;
 	}
 
-	if (trim($m_val) == trim($cor_ans)) {
+	if (strtolower(trim($m_val)) == strtolower(trim($cor_ans))) {
 		$multi[($m_q)]['user'] = true;
 		$right_count += 1;
 		$user_counts["u_count"] += 1;
@@ -75,7 +75,7 @@ foreach ($_POST['written'] as $w_q => $w_val) {
 		$ask_count += 1;
 	}
 
-	if (trim($w_val) == trim($cor_ans)) {
+	if (strtolower(trim($w_val)) == strtolower(trim($cor_ans))) {
 		$written[($w_q)]['user'] = true;
 		$right_count += 1;
 		$user_counts["u_count"] += 1;

@@ -1,5 +1,6 @@
 var questions = null;
 var email = null;
+var active = true;
 
 $(document).ready(function() {
 	email = localStorage.getItem("email");
@@ -22,6 +23,11 @@ $(document).ready(function() {
 
 function handle_submit(e) {
 	e.preventDefault();
+	if (!active) {
+		return;
+	} else {
+		active = !active;
+	}
 	var $form = $("#submit-form");
 	var form_data = getFormData($form);
 	var send_url = $form.attr("action");
@@ -72,6 +78,9 @@ function handle_submit_response(response) {
 				$(".multi" + q).parent().css("background-color", "red");
 				$(".multi" + q).append("<p>Correct answer: " +
 						response.answers.multi[q].answer + "</p>");
+			} else {
+				$(".multi" + q).parent().css("background-color", "lime");
+				$(".multi" + q).append("<p>Correct!</p>");
 			}
 		}
 		for (q in response.answers.written) {
@@ -80,6 +89,9 @@ function handle_submit_response(response) {
 				$(".written" + q).parent().css("background-color", "red");
 				$(".written" + q).append("<p>Correct answer: " +
 						response.answers.written[q].answer + "</p>");
+			} else {
+				$(".written" + q).parent().css("background-color", "lime");
+				$(".written" + q).append("<p>Correct!</p>");
 			}
 		}
 	}

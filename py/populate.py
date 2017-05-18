@@ -12,6 +12,7 @@ with open('questions_multi.csv', 'rb') as multifile:
     for row in multi_reader:
         multi.append({})
         if len(row) != 6:
+            print row
             sys.exit("ERROR! length should be six: " + str(len(row)));
         multi[-1]['question'] = row[0];
         multi[-1]['opt1'] = row[1];

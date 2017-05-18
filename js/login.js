@@ -5,6 +5,12 @@ var submit_action = "";
 window.onload = function() {
 	$("#login_form").submit(handle_submit);
 	$("#login_clear").click(clear_login_fields);
+	if (typeof(Storage) !== "undefined") {
+			// Store
+			localStorage.setItem("email", "");
+		} else {
+			alert("Sorry, your browser does not support Web Storage...");
+		}
 }
 
 /*** Custom Helper Functions ********************************************/
