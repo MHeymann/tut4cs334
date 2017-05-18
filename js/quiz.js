@@ -31,8 +31,6 @@ function handle_submit(e) {
 	var $form = $("#submit-form");
 	var form_data = getFormData($form);
 	var send_url = $form.attr("action");
-	console.log(send_url);
-
 
 	multi_data = {};
 	written_data = {};
@@ -53,7 +51,6 @@ function handle_submit(e) {
 	submit_data["user"] = email;
 	submit_data["multi"] = multi_data;
 	submit_data["written"] = written_data;
-	console.log(JSON.stringify(submit_data));
 
 	$.ajax({
 		url: send_url,
@@ -139,6 +136,7 @@ function set_questions_to_html() {
 		for (var j = 0; j < questions.multi[i].opts.length; j++) {
 			var $radio = $("<input/>", {
 				type: "radio",
+				required: true,
 				name: "multi" + questions.multi[i].qID,
 				value: questions.multi[i]['opts'][j]
 			});
