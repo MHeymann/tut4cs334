@@ -63,6 +63,12 @@ if (!isset($_POST['email'])) {
 		"error_message" => "Please provide an email for the user",
 	));
 	die();
+} else if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+	echo json_encode(array(
+		"error" => true,
+		"error_message" => "Please provide a valid email to log in with",
+	));
+	die();
 }
 
 $password = $_POST['password'];
